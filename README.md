@@ -3,6 +3,11 @@
 
 # example
 ```
-inn1t-f00s@Swagotron:~/Documents/fourth-year/distsyst/ass1$ python client.py -m hello
-b'HTTP/1.0 200 OK\r\nConnection: close\r\nX-Powered-By: PHP/5.5.9-1ubuntu4.20\r\nContent-type: text/html\r\n\r\nHELLO\\n'
+$ python client.py -m Hello
+Received HTTP/1.0 200 OK
+Connection: close
+X-Powered-By: PHP/5.5.9-1ubuntu4.20
+Content-type: text/html
+
+HELLO\n
 ```
