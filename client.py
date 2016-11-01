@@ -27,7 +27,7 @@ def sendGet(message='Test'):
 	data = (s.recv(1000000))
 	s.shutdown(1)
 	s.close()
-	print('Received', repr(data))
+	print('Received', data.decode("utf-8"))
 
 if __name__ == '__main__':
 	args = clargs()
