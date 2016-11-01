@@ -1,5 +1,4 @@
-import requests, tornado, argparse, webbrowser, socket
-from tornado import httpclient
+import argparse, webbrowser, socket
 
 CRLF = "\r\n\r\n"
 
