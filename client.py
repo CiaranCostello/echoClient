@@ -4,24 +4,16 @@ from tornado import httpclient
 CRLF = "\r\n\r\n"
 
 def clargs():
-	main_parser = argparse.ArgumentParser(description='Send a GET request to echo.php on port 8000 of the localhost.')
-	main_parser.add_argument('-m', '--message', required=False, help='Message to echo')
-	return main_parser.parse_args()
+	parser = argparse.ArgumentParser(description='Send a GET request to echo.php on port 8000 of the localhost.')
+	parser.add_argument('-m', '--message', required=False, help='Message to echo')
+	parser.add_argument('-p', '--port', type=int, required=False, help='Port to connect to')
+	parser.add_argument('-o', '--host', required=False, help='Host name to send get request to')
+	return parser.parse_args()
 
-def sendGet2(message='Test'):
-	client = httpclient.HTTPClient()
-	request = tornado.httpclient.HTTPRequest(method='GET', url='http://localhost:8000/echo.php?message='+message)
-	try:
-		p = client.fetch(request)
-		print(p.body)
-	except httpclient.HTTPError as e:
-		print("Error: "+ str(e))
-	client.close()
-
-def sendGet(message='Test'):
+def sendGet(message='Test', port=80, host='localhost'):
 	s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 	# now connect to the web server on port 80 - the normal http port
-	s.connect(("localhost", 8000))
+	s.connect((host, port))
 	request = "GET /echo.php?message={1} HTTP/1.0{0}".format(CRLF, message)
 	s.send(request.encode('utf-8'))
 	data = (s.recv(1000000))
@@ -31,10 +23,19 @@ def sendGet(message='Test'):
 
 if __name__ == '__main__':
 	args = clargs()
-	if(args.message is not None):
-		sendGet(args.message)
+	if args.message is not None:
+		m = args.message
 	else:
-		sendGet()
+		m = 'Test'
+	if args.port is not None:
+		p = args.port
+	else:
+		p = 8000
+	if args.host is not None:
+		h = args.host
+	else:
+		h = 'localhost'
+	sendGet(message=m, port=p, host=h)
 
 
 

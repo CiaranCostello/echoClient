@@ -3,7 +3,7 @@
 
 # example
 ```
-$ python client.py -m Hello
+$ python client.py -m Hello -o localhost -p 8000
 Received HTTP/1.0 200 OK
 Connection: close
 X-Powered-By: PHP/5.5.9-1ubuntu4.20
